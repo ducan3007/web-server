@@ -1,0 +1,25 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "description": "BTL WEB",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ducan3007/web-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ducan3007/web-server/issues"
+  },
+  "homepage": "https://github.com/ducan3007/web-server#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
