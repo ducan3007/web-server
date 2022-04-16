@@ -4,12 +4,17 @@ import morgan from "morgan";
 import cors from "cors";
 import 'dotenv/config'
 
+import router from "./routes/index.js";
+
 const app = express();
 
 app.use(express.json({ limit: '5mb', extended: true }));
 app.use(express.urlencoded({ limit: '5mb', extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
+
+
+app.use('/api',router)
 
 mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
     if (error) {
