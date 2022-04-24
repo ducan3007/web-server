@@ -1,58 +1,79 @@
-# BTL WEB
+# WEB CUỐI KỲ
 
+ĐỀ BÀI : https://itest.com.vn/lects/webappdev/mockproj/healthy-first.htm
 ### Chức năng
-- Quản lý
+
+- Tạo tài khoản cho chuyên viên
 - Thêm một cơ sở
-- 
+- Thêm chứng nhận
+- Thêm kế hoạch thanh tra
 
 ### Các collection
 
-+ Quản lý và Chuyên viên
-  -
+### collection Quản lý và Chuyên viên (User)
 
-+ Cơ sở kinh doanh (Facility)
+  - tài khoản (account)
+  - mật khẩu  (password)
+  - họ tên  (fullname)
+  - ngày sinh (birth)
+  - avatar (image)
+  - khu vực hoạt động (operation_area : { id , name })
+    - tên khu vực (thành phố/quận) (name)
+    - mã khu vực () (mã thành phố + mã quận) (Vd: Hà nội/Nam từ Liêm : 0130)
+  - vai trò (role) "admin" || "staff"
+  
 
-  - Tên
-  - Loại hình
-  - Địa chỉ
-  - Phường
-  - Quận
-  - Thành phố
-  - Chủ sở hữu
-    - Tên
-    - Ngày sinh
-    - CMND
-  - Điện thoại
-  - Tình trạng chứng chỉ
-  - Số cấp Chứng chỉ
-  - Danh sách thực phẩm
+### collection Cơ sở kinh doanh (Business)
 
-+ Giấy chứng nhận: (Certificate)
-   
-   - ref đến Cơ sở kinh doanh
-   
-   - Chứng nhận cho một cơ sở (1-1)
-   - Tình trạng chứng nhận (state)
-      - Hết hạn
-      - Bị thu hồi
-      - Còn hạn     
-   - Hiệu lực ( từ ngày ... đến ngày)
+  - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
+  - Tên (brand)
+  - Loại hình kinh doanh (type)
+  - Ảnh (image)
+  - Địa chỉ (address)
+  - Phường (ward)
+  - Quận (district)
+  - Thành phố (city)
+  - Chủ sở hữu (ower)
+    - Tên         (name)
+    - Ngày sinh   (birth)
+    - CMND        (cmnd)
+  - Điện thoại (phone)
+  - Tình trạng chứng chỉ (certificate_status)
+  - Số cấp Chứng chỉ (certificate_id)
+  - Danh sách thực phẩm ([foods])
+    - Ảnh (image)
+    - Tên (name)
+    - Tình trạng (đạt/ko đạt) (status)
+
+
+### collection  Giấy chứng nhận: (Certificate)
+
+   - ref đến cơ sở kinh doanh 
+
+   - mã chứng chỉ (certificate_id)
+
+   - Tình trạng chứng nhận (status)
+      - Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")     
+   - Hiệu lực ( từ ngày ... đến ngày) (duration)
     
 
-+ Kế hoạch kiểm tra
+### collection Kế hoạch kiểm tra (Plan)
 
   - ref đến cơ sở kinh doanh
 
-  - Thời gian (bắt đầu / kết thúc)
-  - Mẫu thực phẩm []
-  - Kết luận ( đạt hay không đạt)
-  - Quyết định xử lý 
+  - Thời gian (bắt đầu / kết thúc) (duration)
 
-+ Mẫu thực phẩm
+  - Mẫu thực phẩm [] (sample)
+    - mã giám định (id)
+    - ảnh mẫu giám định (image)
+    - bên giám định (third_party)
+    - kết quả (result)
+    - ngày gửi (send_date)
+    - ngày nhận (receive_date)
+  - Kết luận ( đạt hay không đạt) (result)
+  - Quyết định xử lý (penalty)
 
-  - Đơn vị giám dịnh:
-    - Tên
-    - Mã
+
 
 
 

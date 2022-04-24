@@ -1,27 +1,48 @@
 import mongoose from "mongoose";
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    username:{
-        type: String,
-        required: true // giong nhu NOT NULL
+  account: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  birth: {
+    type: String,
+    default: "N/A",
+  },
+  avatar: {
+    type: String,
+    default: "https://secure.gravatar.com/avatar/?s=120&d=mp",
+  },
+  operation_area: {
+    id: {
+      type: String,
+      required: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
+    name: {
+      type: String,
+      required: true,
     },
-    password:{
-        type:String,
-        required:true
-    },
-    created_at:{
-        type: Date,
-        default: new Date(),
-    }
-})
+  },
+  role: {
+    type: String,
+    default: "staff",
+  },
+  created_at: {
+    type: Date,
+    default: new Date(),
+  },
+});
 
-const User = mongoose.model('users',userSchema)
+const USER = mongoose.model("user", userSchema);
 
-export default User
+export default USER;

@@ -3,12 +3,12 @@ import express from "express";
 import { verifyToken } from "../middlewares/verifyToken.js";
 import {updateUser} from "../controllers/users.js";
 
-const User = express.Router();
+const user_router = express.Router();
 
 // put, patch de update restAPI
 
-User.patch('/:id',verifyToken,updateUser) // api/user:id
+user_router.patch('/:id',verifyToken,updateUser) // api/user:id
 
 
 
-export default User;
+export default user_router;
