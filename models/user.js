@@ -11,7 +11,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  username: {
+  fullname: {
     type: String,
     required: true,
   },
@@ -19,11 +19,11 @@ const userSchema = new Schema({
     type: String,
     default: "N/A",
   },
-  avatar: {
+  image: {
     type: String,
     default: "https://secure.gravatar.com/avatar/?s=120&d=mp",
   },
-  operation_area: {
+  work_area: {
     id: {
       type: String,
       required: true,
@@ -43,6 +43,8 @@ const userSchema = new Schema({
   },
 });
 
-const USER = mongoose.model("user", userSchema);
+const User = mongoose.model("user", userSchema);
 
-export default USER;
+
+
+export default User;

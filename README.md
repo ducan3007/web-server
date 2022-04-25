@@ -17,7 +17,7 @@
   - họ tên  (fullname)
   - ngày sinh (birth)
   - avatar (image)
-  - khu vực hoạt động (operation_area : { id , name })
+  - khu vực hoạt động (work_area : { id , name })
     - tên khu vực (thành phố/quận) (name)
     - mã khu vực () (mã thành phố + mã quận) (Vd: Hà nội/Nam từ Liêm : 0130)
   - vai trò (role) "admin" || "staff"
@@ -26,14 +26,14 @@
 ### collection Cơ sở kinh doanh (Business)
 ```
   - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
-  - Tên (brand)
+  - Tên (brandname)
   - Loại hình kinh doanh (type)
   - Ảnh (image)
   - Địa chỉ (address)
   - Phường (ward)
   - Quận (district)
   - Thành phố (city)
-  - Chủ sở hữu (ower)
+  - Chủ sở hữu (owner)
     - Tên         (name)
     - Ngày sinh   (birth)
     - CMND        (cmnd)
@@ -55,6 +55,8 @@
    - Tình trạng chứng nhận (status)
       - Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")     
    - Hiệu lực ( từ ngày ... đến ngày) (duration)
+                                        -(start)
+                                        -(end)
 ```    
 
 ### collection Kế hoạch kiểm tra (Plan)
