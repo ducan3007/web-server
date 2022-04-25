@@ -7,6 +7,7 @@
 - Thêm một cơ sở
 - Thêm chứng nhận
 - Thêm kế hoạch thanh tra
+..................
 
 ## Các collection
 
@@ -17,7 +18,7 @@
   - họ tên  (fullname)
   - ngày sinh (birth)
   - avatar (image)
-  - khu vực hoạt động (work_area : { id , name })
+  - khu vực hoạt động (work_area) : [{ id , name })]
     - tên khu vực (thành phố/quận) (name)
     - mã khu vực () (mã thành phố + mã quận) (Vd: Hà nội/Nam từ Liêm : 0130)
   - vai trò (role) "admin" || "staff"
