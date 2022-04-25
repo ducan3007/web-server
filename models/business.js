@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { no_image } from "../utils/consts";
-import Business from './business';
+import Business from "./business";
 const { Schema } = mongoose;
 
 const businessSchema = new Schema({
@@ -86,8 +86,12 @@ const businessSchema = new Schema({
 
 const Business = mongoose.model("business", businessSchema);
 
-export const check_business_id = async (business_id) => {
-    return Business.findOne({ business_id });
-}
+export const bus_findById = async (business_id) => {
+  return Business.findOne({ business_id: business_id });
+};
+
+export const bus_create_id = async (city_code, district_code) => {
+  
+};
 
 export default Business;
