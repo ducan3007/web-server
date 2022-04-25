@@ -25,7 +25,7 @@
 
 ### collection Cơ sở kinh doanh (Business)
 ```
-  - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
+  - Mã (business_id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
   - Tên (brandname)
   - Loại hình kinh doanh (type)
   - Ảnh (image)
@@ -68,7 +68,7 @@
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
     - ảnh mẫu giám định (image)
-    - bên giám định (third_party)
+    - bên giám định (inspector)
     - kết quả (result)
     - ngày gửi (send_date)
     - ngày nhận (receive_date)
