@@ -1,15 +1,18 @@
 import express from "express";
 
-import auth_router from "./auth.route.js";
-import user_router from "./user.route.js";
+import auth_route from "./auth.route.js";
+import user_route from "./user.route.js";
+import business_route from "./business.route.js";
 
 const router = express.Router();
 
 
+router.use("/", auth_route);
 
+router.use("/", user_route);
 
-router.use("/", auth_router);
-router.use("/user", user_router);
+router.use('/',business_route)
+
 
 
 

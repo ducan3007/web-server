@@ -1,15 +1,18 @@
 import express from "express";
 
-import { signUp, signIn } from "../controllers/users.js";
-import { verifyToken } from "../middlewares/verifyToken.js";
-import { user_auth } from "../controllers/auth.js";
+import { login, create_account,create_admin_account } from "../controllers/auth/auth.controller.js";
+import { verifyToken,verifyRole } from "../middlewares/verify.js";
+import { user_auth } from "../controllers/auth/auth.controller.js";
 
-const auth_router = express.Router();
+const auth_route = express.Router();
 
-auth_router.route("/signup").post(signUp); // api/signup
+auth_route.route("/register/admin/:key").post(create_admin_account);
 
-auth_router.route("/signin").post(signIn); // api/signin
+auth_route.route("/register").post(verifyRole, create_account);
 
-auth_router.route("/auth").get(verifyToken, user_auth);
+auth_route.route("/login").post(login);
 
-export default auth_router;
+auth_route.route("/auth").get(verifyToken, user_auth);
+
+
+export default auth_route;

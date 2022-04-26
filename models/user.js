@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-
+import { gen_user_id } from "../utils/helpers.js";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  account: {
+  id: {
     type: String,
     required: true,
   },
@@ -13,7 +13,11 @@ const userSchema = new Schema({
   },
   fullname: {
     type: String,
-    required: true,
+    default: "N/A",
+  },
+  active: {
+    type: Boolean,
+    default: true,
   },
   birth: {
     type: String,
@@ -24,18 +28,34 @@ const userSchema = new Schema({
     default: "https://secure.gravatar.com/avatar/?s=120&d=mp",
   },
   work_area: {
-    id: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
+    city: [
+      {
+        title: {
+          type: String,
+          default: "N/A",
+        },
+        code: {
+          type: String,
+          default: "N/A",
+        },
+      },
+    ],
+    district: [
+      {
+        title: {
+          type: String,
+          default: "N/A",
+        },
+        code: {
+          type: String,
+          default: "N/A",
+        },
+      },
+    ],
   },
   role: {
     type: String,
-    default: "staff",
+    default: "user",
   },
   created_at: {
     type: Date,
@@ -45,6 +65,22 @@ const userSchema = new Schema({
 
 const User = mongoose.model("user", userSchema);
 
-
+export const create_user_id = async (role) => {
+  try {
+    let user_id = gen_user_id(role);
+    let check = false;
+    while (!check) {
+      let user = await User.findOne({ id: user_id });
+      if (user) {
+        user_id = gen_user_id(role);
+      } else {
+        check = true;
+      }
+    }
+    return user_id;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default User;

@@ -15,14 +15,22 @@
 ### collection Quản lý và Chuyên viên (User)
 
 ```
-  - tài khoản (account)
+  - tài khoản (id)
+  - hoạt động (active)
   - mật khẩu  (password)
   - họ tên  (fullname)
   - ngày sinh (birth)
   - avatar (image)
   - khu vực hoạt động (work_area) : { city[], district:[] }
     {
-      city:[{"Hà Nội","TP HCM"}
+      city:[{
+        title:"Hà Nội"
+        code:"01"
+      },
+      {
+       title:"HCM"
+       code:"02 
+      }
       ]
       district:[
         {
@@ -34,15 +42,14 @@
           code:"0131"
         }
       ]
-
     }
-  - vai trò (role) "admin" || "staff"
+  - vai trò (role) "admin" || "user"
 ```
 
 ### collection Cơ sở kinh doanh (Business)
 
 ```
-  - Mã (business_id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
+  - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
   - Tên (brandname)
   - Loại hình kinh doanh (type)
   - Ảnh (image)
@@ -51,39 +58,46 @@
   - Phường (ward)
   - Quận (district)
   - Thành phố (city)
-  - Chủ sở hữu (owner)
+  - Chủ sở hữu (owner) 
     - Tên         (name)
     - Ngày sinh   (birth)
     - CMND        (cmnd)
   - Điện thoại (phone)
-  - Tình trạng chứng chỉ (certificate_status)
-  - Số cấp Chứng chỉ (certificate_id)
+
+  - Chứng chỉ (certificate)
+    - Mã chứng chỉ (certificate_id)
+    - Tình trạng (status):
+        Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")
+    - Hiệu lực ( từ ngày ... đến ngày) (duration)
+                                        -(start)
+                                        -(end)
+  
   - Danh sách thực phẩm ([foods])
     - Ảnh (image)
     - Tên (name)
     - Tình trạng (đạt/ko đạt) (status)
 ```
 
-### collection Giấy chứng nhận: (Certificate)
+<!-- ### collection Giấy chứng nhận: (Certificate)
 
 ```
-   - ref đến cơ sở kinh doanh
-
+   - 
+   
+   - 
    - mã chứng chỉ (certificate_id)
-
    - Tình trạng chứng nhận (status)
       - Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")
    - Hiệu lực ( từ ngày ... đến ngày) (duration)
                                         -(start)
                                         -(end)
-```
+``` -->
 
 ### collection Kế hoạch kiểm tra (Plan)
 
 ```
-  - ref đến cơ sở kinh doanh
+  - Mã cơ sở (business_id)
 
-  - Thời gian (bắt đầu / kết thúc) (duration)
+  - Lịch trình (bắt đầu / kết thúc) (schedule) (start ) (end)
 
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
@@ -94,6 +108,7 @@
     - ngày nhận (receive_date)
   - Kết luận ( đạt hay không đạt) (result)
   - Quyết định xử lý (penalty)
+  
 ```
 
 

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import { no_image } from "../utils/consts";
-import Business from "./business";
+import { no_image } from "../utils/consts.js";
 const { Schema } = mongoose;
+import certificateSchema from "./certificate.js";
+
 
 const businessSchema = new Schema({
   business_id: {
@@ -19,6 +20,10 @@ const businessSchema = new Schema({
   image: {
     type: String,
     default: no_image,
+  },
+  address_code: {
+    type: String,
+    required: true,
   },
   address: {
     type: String,
@@ -54,14 +59,8 @@ const businessSchema = new Schema({
     type: String,
     required: true,
   },
-  certificate_status: {
-    type: String,
-    default: "N/A",
-  },
-  certificate_id: {
-    type: String,
-    default: "N/A",
-  },
+  certificate:  certificateSchema ,
+
   foods: [
     {
       image: {
@@ -78,7 +77,7 @@ const businessSchema = new Schema({
       },
     },
   ],
-  created_at: {
+  last_update: {
     type: Date,
     default: new Date(),
   },
@@ -90,8 +89,6 @@ export const bus_findById = async (business_id) => {
   return Business.findOne({ business_id: business_id });
 };
 
-export const bus_create_id = async (city_code, district_code) => {
-  
-};
+export const bus_create_id = async (city_code, district_code) => {};
 
 export default Business;

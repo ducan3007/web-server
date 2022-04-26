@@ -4,12 +4,12 @@ import { no_image } from "../utils/consts";
 const { Schema } = mongoose;
 
 const planSchema = new Schema({
-  business_ref: {
+  business_id: {
     type: Schema.Types.ObjectId,
     ref: "business",
     required: true,
   },
-  duration: {
+  shedule: {
     start: {
       type: String,
       default: "N/A",
