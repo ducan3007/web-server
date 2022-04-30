@@ -21,28 +21,13 @@
   - họ tên  (fullname)
   - ngày sinh (birth)
   - avatar (image)
-  - khu vực hoạt động (work_area) : { city[], district:[] }
-    {
-      city:[{
-        title:"Hà Nội"
-        code:"01"
-      },
-      {
-       title:"HCM"
-       code:"02 
-      }
-      ]
-      district:[
-        {
-          title:"Quận Nam từ Liêm",
-          code:"0130"
-        },
-        {
-          title:"Quận Bắc từ Liêm,
-          code:"0131"
-        }
-      ]
+  - khu vực hoạt động (work_area) : [ city, district,code ]
+    [{
+      city:"Ha Noi",
+      district:"Nam tu Liem",
+      code:"01D019"
     }
+    ]
   - vai trò (role) "admin" || "user"
 ```
 
@@ -58,7 +43,7 @@
   - Phường (ward)
   - Quận (district)
   - Thành phố (city)
-  - Chủ sở hữu (owner) 
+  - Chủ sở hữu (owner)
     - Tên         (name)
     - Ngày sinh   (birth)
     - CMND        (cmnd)
@@ -71,7 +56,7 @@
     - Hiệu lực ( từ ngày ... đến ngày) (duration)
                                         -(start)
                                         -(end)
-  
+
   - Danh sách thực phẩm ([foods])
     - Ảnh (image)
     - Tên (name)
@@ -81,9 +66,9 @@
 <!-- ### collection Giấy chứng nhận: (Certificate)
 
 ```
-   - 
-   
-   - 
+   -
+
+   -
    - mã chứng chỉ (certificate_id)
    - Tình trạng chứng nhận (status)
       - Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")
@@ -108,9 +93,8 @@
     - ngày nhận (receive_date)
   - Kết luận ( đạt hay không đạt) (result)
   - Quyết định xử lý (penalty)
-  
-```
 
+```
 
 ### Query
 
@@ -136,4 +120,4 @@ db.col.find({work_area.city:{$elemMatch:{code:'001}}})
 
 ```
 
-###  Nếu mảng chỉ chứa các chuỗi thì dùng find({field:"value"}) như bình thường
+### Nếu mảng chỉ chứa các chuỗi thì dùng find({field:"value"}) như bình thường

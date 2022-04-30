@@ -27,32 +27,22 @@ const userSchema = new Schema({
     type: String,
     default: "https://secure.gravatar.com/avatar/?s=120&d=mp",
   },
-  work_area: {
-    city: [
-      {
-        title: {
-          type: String,
-          default: "N/A",
-        },
-        code: {
-          type: String,
-          default: "N/A",
-        },
+  work_area: [
+    {
+      city: {
+        type: String,
+        default: "N/A",
       },
-    ],
-    district: [
-      {
-        title: {
-          type: String,
-          default: "N/A",
-        },
-        code: {
-          type: String,
-          default: "N/A",
-        },
+      district: {
+        type: String,
+        default: "N/A",
       },
-    ],
-  },
+      code:{
+        type: String,
+        default: "N/A",
+      }
+    },
+  ],
   role: {
     type: String,
     default: "user",
