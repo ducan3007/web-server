@@ -19,6 +19,14 @@ const userSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  email: {
+    type: String,
+    default: "N/A",
+  },
+  phone: {
+    type: String,
+    default: "N/A",
+  },
   birth: {
     type: String,
     default: "N/A",
@@ -37,10 +45,10 @@ const userSchema = new Schema({
         type: String,
         default: "N/A",
       },
-      code:{
+      code: {
         type: String,
         default: "N/A",
-      }
+      },
     },
   ],
   role: {

@@ -12,6 +12,10 @@ user_route
     .get(verifyRole, get_many_user); // admin - lấy các danh sách tài khoản.
 
 //prettier-ignore
+/*
+  Lấy hết dữ liệu dùng user.findOne({id: req.params.id})
+*/
+
 user_route
   .route("/user/:id")
   .get(verifyToken, get_user_detail) // admin / user - xem thông tin tài khoản

@@ -13,6 +13,7 @@ const businessSchema = new Schema({
     type: String,
     required: true,
   },
+  // loại hình : ăn uống - sản xuất
   type: {
     type: String,
     required: true,
@@ -59,6 +60,7 @@ const businessSchema = new Schema({
     type: String,
     required: true,
   },
+
   certificate:  certificateSchema ,
 
   foods: [

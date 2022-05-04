@@ -20,6 +20,8 @@
   - mật khẩu  (password)
   - họ tên  (fullname)
   - ngày sinh (birth)
+  - email (email)
+  - số điện thoại (phone)
   - avatar (image)
   - khu vực hoạt động (work_area) : [ city, district,code ]
     [{

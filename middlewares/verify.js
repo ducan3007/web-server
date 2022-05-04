@@ -22,6 +22,7 @@ export const verifyToken = async (req, res, next) => {
   }
 };
 
+
 export const verifyRole = async (req, res, next) => {
   const token = req.header("x-auth-token");
   try {

@@ -63,13 +63,16 @@ export const login = async (req, res, next) => {
     if (!checkPassword) {
       return res.status(400).json(response("Tài khoản và mật khẩu không đúng", null));
     } else {
+
       let payload = {
         user: {
           id: user.id,
           role: user.role,
         },
       };
-      const token = jwt.sign(payload, process.env.KEY, { expiresIn: "3600000" });
+
+      const token = jwt.sign(payload, process.env.KEY, { expiresIn: "7200000" });
+
       return res.status(200).json(response("Đăng nhập thành công", { token }));
     }
   } catch (error) {
