@@ -1,14 +1,10 @@
 import express from "express";
 
-const plan_routes = express.Router();
+const plan_route = express.Router();
 
 
-plan_route.route("/plan").get(get_plan);
+// plan_routes.route("/plan").get(get_plan);
 
 
-plan_route.route("/plan").get(get_plan);
 
-plan_route.route("/plan").get(get_plan);
-
-
-export default plan_routes;
+export default plan_route;

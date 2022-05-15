@@ -5,13 +5,13 @@ const { Schema } = mongoose;
 const certificateSchema = new Schema({
   certificate_id: {
     type: String,
-    required: true,
+    default: "N/A",
   },
   status: {
     type: String,
-    default: "N/A",
+    default: "Chưa cấp",
   },
-  duration: {
+  time: {
     start: {
       type: String,
       default: "N/A",

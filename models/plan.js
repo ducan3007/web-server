@@ -9,6 +9,10 @@ const planSchema = new Schema({
     ref: "business",
     required: true,
   },
+  status: {
+    type: String,
+    default: "pending",
+  },
   shedule: {
     start: {
       type: String,
@@ -19,7 +23,7 @@ const planSchema = new Schema({
       default: "N/A",
     },
   },
-  
+
   samples: [
     {
       id: {

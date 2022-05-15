@@ -28,11 +28,11 @@ const businessSchema = new Schema({
   },
   address: {
     type: String,
-    required: true,
+    default: "N/A",
   },
   ward: {
     type: String,
-    required: true,
+    default: true,
   },
   district: {
     type: String,
@@ -47,7 +47,7 @@ const businessSchema = new Schema({
       type: String,
       default: "N/A",
     },
-    birh: {
+    birth: {
       type: String,
       default: "N/A",
     },

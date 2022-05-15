@@ -55,7 +55,7 @@
     - Mã chứng chỉ (certificate_id)
     - Tình trạng (status):
         Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")
-    - Hiệu lực ( từ ngày ... đến ngày) (duration)
+    - Hiệu lực ( từ ngày ... đến ngày) (time)
                                         -(start)
                                         -(end)
 
@@ -85,7 +85,7 @@
   - Mã cơ sở (business_id)
 
   - Lịch trình (bắt đầu / kết thúc) (schedule) (start ) (end)
-
+  - Trạng thái (thực hiện hay chưa) : status ("done", "pendin","cancel")
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
     - ảnh mẫu giám định (image)
