@@ -15,8 +15,10 @@ const businessSchema = new Schema({
   // loại hình : ăn uống - sản xuất
   types: [
     {
-      type: String,
-      required: true,
+      title: {
+        type: String,
+        default: "Dịch vụ",
+      },
     },
   ],
   image: {
