@@ -38,7 +38,7 @@
 ```
   - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
   - Tên (brandname)
-  - Loại hình kinh doanh (type)
+  - Loại hình kinh doanh ([types])
   - Ảnh (image)
   - Mã khu vực (dùng cho lọc và tìm kiếm) (address_code ) = (district_code) || (city_code)
   - Địa chỉ (address)
@@ -58,7 +58,12 @@
     - Hiệu lực ( từ ngày ... đến ngày) (time)
                                         -(start)
                                         -(end)
-
+  - Đồ ăn [foods]
+  [{
+      image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+      name: "Cơm rang",
+      status: "Đạt an toàn vệ sinh",
+    }],
 ```
 
 <!-- ### collection Giấy chứng nhận: (Certificate)
