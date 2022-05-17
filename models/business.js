@@ -3,6 +3,7 @@ import { no_image } from "../utils/consts.js";
 const { Schema } = mongoose;
 import certificateSchema from "./certificate.js";
 
+
 const businessSchema = new Schema({
   business_id: {
     type: String,
@@ -17,12 +18,10 @@ const businessSchema = new Schema({
     type: String,
     required: true,
   },
-  image: [
-    {
-      type: String,
-      default: no_image,
-    },
-  ],
+  image: {
+    type: String,
+    default: no_image,
+  },
   address_code: {
     type: String,
     required: true,
@@ -62,7 +61,7 @@ const businessSchema = new Schema({
     required: true,
   },
 
-  certificate: certificateSchema,
+  certificate:  certificateSchema ,
 
   foods: [
     {
