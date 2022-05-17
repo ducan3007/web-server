@@ -39,7 +39,7 @@
   - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
   - Tên (brandname)
   - Loại hình kinh doanh (type)
-  - Ảnh (image)
+  - Ảnh ([image])
   - Mã khu vực (dùng cho lọc và tìm kiếm) (address_code ) = (district_code) || (city_code)
   - Địa chỉ (address)
   - Phường (ward)
@@ -59,10 +59,6 @@
                                         -(start)
                                         -(end)
 
-  - Danh sách thực phẩm ([foods])
-    - Ảnh (image)
-    - Tên (name)
-    - Tình trạng (đạt/ko đạt) (status)
 ```
 
 <!-- ### collection Giấy chứng nhận: (Certificate)

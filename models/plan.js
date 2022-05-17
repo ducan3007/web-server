@@ -5,8 +5,13 @@ const { Schema } = mongoose;
 
 const planSchema = new Schema({
   business_id: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "business",
+    required: true,
+  },
+  user_id: {
+    type: String,
+    ref: "user",
     required: true,
   },
   status: {
