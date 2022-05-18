@@ -16,7 +16,19 @@ const planSchema = new Schema({
   },
   status: {
     type: String,
-    default: "pending",
+    default: "upcoming",
+  },
+  result_boolean: {
+    type: Boolean,
+    default: false,
+  },
+  result: {
+    type: String,
+    default: "N/A",
+  },
+  penalty: {
+    type: String,
+    default: "N/A",
   },
   shedule: {
     start: {
@@ -47,24 +59,17 @@ const planSchema = new Schema({
         type: String,
         default: "N/A",
       },
-      send_date: {
+      send_at: {
         type: String,
         default: "N/A",
       },
-      receive_date: {
+      receive_at: {
         type: String,
         default: "N/A",
       },
     },
   ],
-  result: {
-    type: String,
-    default: "N/A",
-  },
-  penalty: {
-    type: String,
-    default: "N/A",
-  },
+
   created_at: {
     type: Date,
     default: new Date(),

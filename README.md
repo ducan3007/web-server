@@ -86,7 +86,9 @@
   - Mã cơ sở (business_id)
 
   - Lịch trình (bắt đầu / kết thúc) (schedule) (start ) (end)
-  - Trạng thái (thực hiện hay chưa) : status ("done", "pendin","cancel")
+
+  - Trạng thái (thực hiện hay chưa) : status ("done", "upcoming","canceled")
+  
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
     - ảnh mẫu giám định (image)
@@ -96,6 +98,36 @@
     - ngày nhận (receive_date)
   - Kết luận ( đạt hay không đạt) (result)
   - Quyết định xử lý (penalty)
+
+```javascripts
+ {
+    business_id: "20123456",
+    shedule: {
+      start: "20/02/2020",
+      end: "26/02/2020",
+    },
+    status:"upcoming",
+    result: "Đạt",
+    penalty: "N/A",
+    samples: [
+      {
+        id: "A1",
+        image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+        inspector: "Cong ty B",
+        result: "Mẫu đạt an toàn",
+        send_at: "20/02/2020",
+        receive_at: "20/02/2020",
+      },
+      {
+        id: "A1",
+        image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+        inspector: "Cong ty B",
+        result: "Mẫu đạt an toàn",
+        send_at: "20/02/2020",
+        receive_at: "20/02/2020",
+      },
+    ],
+  },
 
 ```
 

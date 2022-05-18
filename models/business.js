@@ -25,6 +25,7 @@ const businessSchema = new Schema({
     type: String,
     default: no_image,
   },
+
   address_code: {
     type: String,
     required: true,
