@@ -22,15 +22,18 @@ const planSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  result_comment: {
+    type: String,
+  },
   result: {
     type: String,
-    default: "N/A",
+    default: "Chưa có",
   },
   penalty: {
     type: String,
-    default: "N/A",
+    default: "Không",
   },
-  shedule: {
+  schedule: {
     start: {
       type: String,
       default: "N/A",
@@ -57,7 +60,7 @@ const planSchema = new Schema({
       },
       result: {
         type: String,
-        default: "N/A",
+        default: "Chưa có kết quả",
       },
       send_at: {
         type: String,

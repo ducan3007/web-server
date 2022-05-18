@@ -87,7 +87,7 @@
 
   - Lịch trình (bắt đầu / kết thúc) (schedule) (start ) (end)
 
-  - Trạng thái (thực hiện hay chưa) : status ("done", "upcoming","canceled")
+  - Trạng thái (thực hiện hay chưa) : status ("done", "no","canceled")
   
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
