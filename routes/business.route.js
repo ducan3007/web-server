@@ -5,7 +5,8 @@ import {
   get_many_business,
   get_business,
   add_business,
-  update_business
+  update_business,
+  create_business
 } from "../controllers/business/business.controller.js";
 
 const business_route = express.Router();
@@ -15,18 +16,18 @@ const business_route = express.Router();
 
 /*
   api này dành cho các cơ sở kinh doanh
-
   @POST: Thêm một cơ sở kinh doanh
-
   @GET: lấy tất cả các cơ sở kinh doanh
- 
 */
-business_route.route('/business')
-    .post(verifyToken, add_business)
-    .get(verifyToken, get_many_business)
+business_route.route('/create_business')
+    .post(verifyToken, create_business)
+    
 
 //prettier-ignore
 
+
+business_route.route('/business')
+    .post(verifyToken, add_business)
 /*
 
   api này dành cho các cơ sở kinh doanh
@@ -47,5 +48,7 @@ business_route
 //     .route("business/:id/certificate")
 //     .get(verifyToken, get_certificate)
 //     .patch(verifyToken, update_a_business);
+
+
 
 export default business_route;

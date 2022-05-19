@@ -91,6 +91,10 @@ export const bus_findById = async (business_id) => {
   return Business.findOne({ business_id: business_id });
 };
 
-export const bus_create_id = async (city_code, district_code) => {};
+export const bus_create_id = async (city_code, district_code) => {
+  var bus_id = city_code + Date.toString;
+  return bus_id;
+};
+
 
 export default Business;

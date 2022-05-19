@@ -53,6 +53,7 @@ export const create_account = async (req, res) => {
 
 export const login = async (req, res, next) => {
   try {
+    console.log("try to login");
     const { account, password } = req.body;
     const user = await User.findOne({ id: account });
     if (!user) {
