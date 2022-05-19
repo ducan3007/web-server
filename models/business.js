@@ -25,11 +25,11 @@ const businessSchema = new Schema({
     type: String,
     default: no_image,
   },
-
   address_code: {
     type: String,
     required: true,
   },
+
   address: {
     type: String,
     default: "N/A",
@@ -48,14 +48,6 @@ const businessSchema = new Schema({
   },
   owner: {
     name: {
-      type: String,
-      default: "N/A",
-    },
-    birth: {
-      type: String,
-      default: "N/A",
-    },
-    cmnd: {
       type: String,
       default: "N/A",
     },

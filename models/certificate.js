@@ -27,6 +27,4 @@ const certificateSchema = new Schema({
   },
 });
 
-
-
 export default certificateSchema;

@@ -40,7 +40,6 @@
   - Tên (brandname)
   - Loại hình kinh doanh ([types])
   - Ảnh (image)
-  - Mã khu vực (dùng cho lọc và tìm kiếm) (address_code ) = (district_code) || (city_code)
   - Địa chỉ (address)
   - Phường (ward)
   - Quận (district)
@@ -82,13 +81,13 @@
 
 ### collection Kế hoạch kiểm tra (Plan)
 
-```
+````
   - Mã cơ sở (business_id)
 
   - Lịch trình (bắt đầu / kết thúc) (schedule) (start ) (end)
 
   - Trạng thái (thực hiện hay chưa) : status ("done", "no","canceled")
-  
+
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
     - ảnh mẫu giám định (image)
@@ -100,6 +99,7 @@
   - Quyết định xử lý (penalty)
 
 ```javascripts
+
  {
     business_id: "20123456",
     shedule: {
@@ -129,7 +129,7 @@
     ],
   },
 
-```
+````
 
 ### Query
 
