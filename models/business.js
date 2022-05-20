@@ -3,7 +3,6 @@ import { no_image } from "../utils/consts.js";
 const { Schema } = mongoose;
 import certificateSchema from "./certificate.js";
 
-
 const businessSchema = new Schema({
   business_id: {
     type: String,
@@ -14,10 +13,14 @@ const businessSchema = new Schema({
     required: true,
   },
   // loại hình : ăn uống - sản xuất
-  type: {
-    type: String,
-    required: true,
-  },
+  types: [
+    {
+      title: {
+        type: String,
+        default: "Dịch vụ",
+      },
+    },
+  ],
   image: {
     type: String,
     default: no_image,
@@ -26,13 +29,14 @@ const businessSchema = new Schema({
     type: String,
     required: true,
   },
+
   address: {
     type: String,
-    required: true,
+    default: "N/A",
   },
   ward: {
     type: String,
-    required: true,
+    default: true,
   },
   district: {
     type: String,
@@ -47,21 +51,13 @@ const businessSchema = new Schema({
       type: String,
       default: "N/A",
     },
-    birh: {
-      type: String,
-      default: "N/A",
-    },
-    cmnd: {
-      type: String,
-      default: "N/A",
-    },
   },
   phone: {
     type: String,
     required: true,
   },
 
-  certificate:  certificateSchema ,
+  certificate: certificateSchema,
 
   foods: [
     {
@@ -84,6 +80,45 @@ const businessSchema = new Schema({
     default: new Date(),
   },
 });
+
+// {
+//   business_id: "20123456",
+//   brandname: "Bún 11",
+//   type: "Dịch vụ",
+//   image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+//   address_code: "",
+//   address: "Đường 70",
+//   ward: "Phường Tây Mỗ",
+//   district: "Quận Nam Từ Liêm",
+//   city: "Thành phố Hà Nội",
+//   owner: {
+//     name: "Nguyen Van A",
+//     birth: "19/02/2000",
+//     cmnd: "123456789",
+//   },
+//   phone: "0987654321",
+//   certificate: {
+//     certificate_id: "2022234623",
+//     status: "Còn hạn",
+//     time: {
+//       start: "20/02/2020",
+//       end: "26/02/2020",
+//     },
+//   },
+//   foods: [
+//     {
+//       image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+//       name: "Cơm rang",
+//       status: "Đạt an toàn vệ sinh",
+//     },
+//     {
+//       image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+//       name: "Bún",
+//       status: "Đạt an toàn vệ sinh",
+//     },
+//   ],
+//   last_update: "20/02/2020",
+// },
 
 const Business = mongoose.model("business", businessSchema);
 

@@ -38,9 +38,8 @@
 ```
   - Mã (id) : (mã tạo bằng mã thành phố + mã quận + random) (Hà nội/nam từ liêm 0130-1a25ce)
   - Tên (brandname)
-  - Loại hình kinh doanh (type)
+  - Loại hình kinh doanh ([types])
   - Ảnh (image)
-  - Mã khu vực (dùng cho lọc và tìm kiếm) (address_code ) = (district_code) || (city_code)
   - Địa chỉ (address)
   - Phường (ward)
   - Quận (district)
@@ -55,14 +54,15 @@
     - Mã chứng chỉ (certificate_id)
     - Tình trạng (status):
         Hết hạn("expired") || Bị thu hồi("revoked") || Còn hạn("valid") || Chưa cấp ("N/A")
-    - Hiệu lực ( từ ngày ... đến ngày) (duration)
+    - Hiệu lực ( từ ngày ... đến ngày) (time)
                                         -(start)
                                         -(end)
-
-  - Danh sách thực phẩm ([foods])
-    - Ảnh (image)
-    - Tên (name)
-    - Tình trạng (đạt/ko đạt) (status)
+  - Đồ ăn [foods]
+  [{
+      image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+      name: "Cơm rang",
+      status: "Đạt an toàn vệ sinh",
+    }],
 ```
 
 <!-- ### collection Giấy chứng nhận: (Certificate)
@@ -81,10 +81,12 @@
 
 ### collection Kế hoạch kiểm tra (Plan)
 
-```
+````
   - Mã cơ sở (business_id)
 
   - Lịch trình (bắt đầu / kết thúc) (schedule) (start ) (end)
+
+  - Trạng thái (thực hiện hay chưa) : status ("done", "no","canceled")
 
   - Mẫu thực phẩm [] (sample)
     - mã giám định (id)
@@ -96,7 +98,38 @@
   - Kết luận ( đạt hay không đạt) (result)
   - Quyết định xử lý (penalty)
 
-```
+```javascripts
+
+ {
+    business_id: "20123456",
+    shedule: {
+      start: "20/02/2020",
+      end: "26/02/2020",
+    },
+    status:"upcoming",
+    result: "Đạt",
+    penalty: "N/A",
+    samples: [
+      {
+        id: "A1",
+        image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+        inspector: "Cong ty B",
+        result: "Mẫu đạt an toàn",
+        send_at: "20/02/2020",
+        receive_at: "20/02/2020",
+      },
+      {
+        id: "A1",
+        image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
+        inspector: "Cong ty B",
+        result: "Mẫu đạt an toàn",
+        send_at: "20/02/2020",
+        receive_at: "20/02/2020",
+      },
+    ],
+  },
+
+````
 
 ### Query
 

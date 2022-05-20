@@ -5,11 +5,35 @@ const { Schema } = mongoose;
 
 const planSchema = new Schema({
   business_id: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "business",
     required: true,
   },
-  shedule: {
+  user_id: {
+    type: String,
+    ref: "user",
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "upcoming",
+  },
+  result_boolean: {
+    type: Boolean,
+    default: false,
+  },
+  result_comment: {
+    type: String,
+  },
+  result: {
+    type: String,
+    default: "Chưa có",
+  },
+  penalty: {
+    type: String,
+    default: "Không",
+  },
+  schedule: {
     start: {
       type: String,
       default: "N/A",
@@ -19,7 +43,7 @@ const planSchema = new Schema({
       default: "N/A",
     },
   },
-  
+
   samples: [
     {
       id: {
@@ -36,26 +60,19 @@ const planSchema = new Schema({
       },
       result: {
         type: String,
-        default: "N/A",
+        default: "Chưa có kết quả",
       },
-      send_date: {
+      send_at: {
         type: String,
         default: "N/A",
       },
-      receive_date: {
+      receive_at: {
         type: String,
         default: "N/A",
       },
     },
   ],
-  result: {
-    type: String,
-    default: "N/A",
-  },
-  penalty: {
-    type: String,
-    default: "N/A",
-  },
+
   created_at: {
     type: Date,
     default: new Date(),
