@@ -261,6 +261,7 @@ export const business_detail = {
   business_id: "20123456",
   brandname: "ABC Food - Công ty TNHH Thực phẩm sạch ABC",
   types: [{ title: "Sản xuất" }, { title: "Dịch vụ" }],
+  isImage: true, // image la base64
   image: "https://res.cloudinary.com/dtzindhuc/image/upload/v1650799247/no_images_sc1t5e.png",
   address_code: "",
   address: "Thôn Nghi Khúc, Xã An Bình, Huyện Thuận Thành, Tỉnh Bắc Ninh, Việt Nam",
@@ -273,8 +274,9 @@ export const business_detail = {
     cmnd: "123456789",
   },
   phone: "0987654321",
+  isNewCertificate: true,
   certificate: {
-    certificate_id: "2022234623",
+    certificate_id: "2022 462312", // tao cert id 
     status: "Còn hạn",
     time: {
       start: "20/02/2020",
@@ -296,6 +298,9 @@ export const business_detail = {
   ],
   last_check: "20/02/2020",
 };
+
+
+
 
 export const business = [
   {
@@ -491,7 +496,8 @@ export const plans = [
       start: "20/02/2020",
       end: "26/02/2020",
     },
-    result_comment: "Cơ sở vật c dfd fdf dddddddd fdf dfd  dfd  df dfhất chư dsdddddfdf df df d fdff df đf fdf dff dfd fdfd dfa tốt",
+    result_comment:
+      "Cơ sở vật c dfd fdf dddddddd fdf dfd  dfd  df dfhất chư dsdddddfdf df df d fdff df đf fdf dff dfd fdfd dfa tốt",
     result: "Đạt",
     status: "no",
     penalty: "N/A",
