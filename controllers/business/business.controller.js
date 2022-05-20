@@ -1,6 +1,8 @@
 import Business from "../../models/business.js";
 import response from "../../utils/response.js";
 
+import { gen_business_id } from "../../utils/helpers.js";
+
 
 
 
@@ -23,8 +25,11 @@ export const get_business = async (req, res) => {
 export const create_business = async (req, res) => {
     try {
         const user = req.body;
-        let newBusiness = new Business({
-            business_id : user.business_id,
+        var certificate = req.body.createCertificate;
+        if(certificate) {
+            // Kiem tra id da ton tai hay chua, chua thi tao moi, roi thi bao lai
+            let newBusiness = new Business({
+            business_id : gen_business_id,
             brandname : user.brandname,
             type : user.type,
             image: user.image,
@@ -34,10 +39,13 @@ export const create_business = async (req, res) => {
             district : user.district,
             city : user.city,
             phone : user.phone
-    })
+            })
 
-    await newBusiness.save();
-    return res.status(200).json(response("Tạo cơ sở kinh doanh thành công", newBusiness));
+            await newBusiness.save();
+            return res.status(200).json(response("Tạo cơ sở kinh doanh thành công", newBusiness));
+        }
+
+
     } catch (error) {
         console.log(error);
     }
@@ -57,7 +65,3 @@ export const update_business = async (req, res) => {
         console.log(error);
     }
 }
-
-export const bus_create_id = async (city_code, district_code) => {
-
-};
