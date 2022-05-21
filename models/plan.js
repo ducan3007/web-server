@@ -24,6 +24,7 @@ const planSchema = new Schema({
   },
   result_comment: {
     type: String,
+    default: ""
   },
   result: {
     type: String,

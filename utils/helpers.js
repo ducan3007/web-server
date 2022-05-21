@@ -12,13 +12,11 @@ export const gen_user_id = (role) => {
 };
 
 export const gen_business_id = () => {
-  const num = "0123456789";
   let date = new Date();
   let output = date.getFullYear().toString();
-  for (let i = 0; i < 10; ++i) {
-    output += num.charAt(Math.floor(Math.random() * num.length));
+  for(let i = 0; i < 5; i++) {
+    output += Math.floor(Math.random() * 10);
   }
-  output.toString
   return output;
 };
 

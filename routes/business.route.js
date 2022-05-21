@@ -38,9 +38,10 @@ business_route.route('/business')
 */
 
 business_route
-    .route("business/:id")
-    .get(verifyToken, get_business)
-    .patch(verifyToken, update_business);
+    .route("/business/get_business").get(verifyToken, get_business);
+
+business_route
+    .route('/business/update_business').patch(verifyToken, update_business);
 
     //prettier-ignore
 

@@ -1,10 +1,6 @@
 import Business from "../../models/business.js";
 import response from "../../utils/response.js";
-
 import { gen_business_id } from "../../utils/helpers.js";
-
-
-
 
 export const get_many_business = async (req, res) => {
     try {
@@ -16,7 +12,7 @@ export const get_many_business = async (req, res) => {
 
 export const get_business = async (req, res) => {
     try {
-        
+        res.status(200).json(response("get business by id", await Business.findOne({business_id:req.query.id})));
     } catch (error) {
         console.log(error);
     }
@@ -27,9 +23,10 @@ export const create_business = async (req, res) => {
         const user = req.body;
         var certificate = req.body.createCertificate;
         if(certificate) {
+            let b_id = await gen_business_id();
             // Kiem tra id da ton tai hay chua, chua thi tao moi, roi thi bao lai
             let newBusiness = new Business({
-            business_id : gen_business_id,
+            business_id : b_id,
             brandname : user.brandname,
             type : user.type,
             image: user.image,
@@ -60,6 +57,17 @@ export const add_business = async (req, res) => {
 }
 export const update_business = async (req, res) => {
     try {
+        if(await Business.findOne({business_id:req.query.id})) {
+            console.log('da tim thay');
+            let update = req.body;
+            await Business.findOneAndUpdate({business_id:req.query.id}, update);
+            console.log(update);
+            return res.status(200).json(response("Cập nhật cơ sở kinh doanh thành công"));
+        }
+        else {
+            console.log('cant find');
+            return res.status(404).json(response("Khong tim duoc cơ sở kinh doanh theo id"));
+        }
         
     } catch (error) {
         console.log(error);
