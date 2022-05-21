@@ -4,6 +4,7 @@ import User from "../../models/user.js";
 import response from "../../utils/response.js";
 import { create_user_id } from "../../models/user.js";
 import { uploadImage } from "../../utils/cloudinary.js";
+import Business from "../../models/business.js";
 
 export const update_user = async (req, res, next) => {
   try {
@@ -21,50 +22,59 @@ export const update_user = async (req, res, next) => {
   }
 };
 
+
+//Lay thong tin role theo id
 export const get_user_detail = async (req, res, next) => {
   try {
+    let _filter = req.query;
+    console.log(_filter);
+    let resault = await User.findOne(_filter);
+    if(resault == null) {
+      return res.status(404).json(response('Không tìm được người dùng theo id', _filter));
+    }
+    else {
+      return res.status(200).json(response('Thông tin người dùng theo id', resault));
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
-
-/*
-  Truy vẫn lọc người dùng thông qua body của request:  districts:[mã quận]
-*/
-export const get_many_user = async (req, res, next) => {
+//Lay danh sach nguoi dung theo bo loc
+export const get_many_user = async(req, res, next) => {
   try {
-    // kiểm tra req.body
-    const _filter = req.body;
-    const _query = req.query;
-    const _params = req.params;
-
-    if (_filter.districts) {
-      console.log(_filter.districts);
-      res.status(200).json(response("get many user filter by districts", await User.find({work_area:{district:_filter.districrs}})));
+    let _filter = req.body;
+    let list_user = await User.find(_filter);
+    if(list_user != null) {
+      return res.status(200).json(response("lấy danh sách thành công", list_user));
     }
-
-    // if(_filter.role) {
-    //     res.status(200).json(response("get many user filter by role", await User.find({role:_filter.role})));
-    // }
-
-
-    //lay tat ca nguoi dung
-    if (!req.body && !req.params) {
-      const user_list = await User.find({});
-      res.status(200).json(response("get many user", user_list));
+    else {
+      return res.status(404).json(response("Không tìm thấy danh sách theo bộ lọc"));
     }
-    // res.status(200).json(response("get many user", null));
-   
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 
+//Xóa người dùng theo id, chi admin moi duoc quyen xoa
 export const delete_user = async (req, res, next) => {
   try {
+    let _filter = req.query;
+    let user = await User.find(_filter);
+    console.log(_filter);
+    console.log(user);
+    if(user.length != 0) {
+      // await User.findOneAndDelete({ _filter })
+      return res.status(200).json(response("đã xóa người dùng", user));
+    }
+    else {
+      return res.status(404).json(response("Không tìm thấy danh sách theo bộ lọc"));
+    }
+    
   } catch (error) {
     console.log(error);
   }
 };
+
+

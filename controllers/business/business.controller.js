@@ -12,7 +12,13 @@ export const get_many_business = async (req, res) => {
 
 export const get_business = async (req, res) => {
     try {
-        res.status(200).json(response("get business by id", await Business.findOne({business_id:req.query.id})));
+        if(await Business.findOne({business_id:req.query.id})) {
+            res.status(200).json(response("tra business theo id", await Business.findOne({business_id:req.query.id})));
+        }
+        else {
+            return res.status(404).json(response("Khong tim duoc cơ sở kinh doanh theo id"));
+        }
+        
     } catch (error) {
         console.log(error);
     }
@@ -58,14 +64,12 @@ export const add_business = async (req, res) => {
 export const update_business = async (req, res) => {
     try {
         if(await Business.findOne({business_id:req.query.id})) {
-            console.log('da tim thay');
             let update = req.body;
             await Business.findOneAndUpdate({business_id:req.query.id}, update);
             console.log(update);
             return res.status(200).json(response("Cập nhật cơ sở kinh doanh thành công"));
         }
         else {
-            console.log('cant find');
             return res.status(404).json(response("Khong tim duoc cơ sở kinh doanh theo id"));
         }
         
