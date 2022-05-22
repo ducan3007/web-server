@@ -4,6 +4,11 @@ import "dotenv/config";
 
 export const verifyToken = async (req, res, next) => {
   const token = req.header("x-auth-token");
+  Object.keys(req.body).forEach((key) => {
+    if (req.body[key] === "" || req.body[key] === undefined) {
+      delete req.body[key];
+    }
+  });
 
   try {
     if (!token) {
@@ -22,8 +27,12 @@ export const verifyToken = async (req, res, next) => {
   }
 };
 
-
 export const verifyRole = async (req, res, next) => {
+  Object.keys(req.body).forEach((key) => {
+    if (req.body[key] === "") {
+      delete req.body[key];
+    }
+  });
   const token = req.header("x-auth-token");
   try {
     if (!token) {
@@ -40,4 +49,8 @@ export const verifyRole = async (req, res, next) => {
     console.log(error);
     return res.status(403).json(response("Bạn không có quyền", null));
   }
+};
+export const verifyWorkeArea = async (req, res, next) => {
+  try {
+  } catch (error) {}
 };

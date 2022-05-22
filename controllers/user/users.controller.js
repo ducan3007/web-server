@@ -7,60 +7,106 @@ import { uploadImage } from "../../utils/cloudinary.js";
 
 export const update_user = async (req, res, next) => {
   try {
-    // Update user thong qua user.id
-    const user = req.body;
-    if (user.image) {
-      let image_load = await uploadImage(user.image);
-      console.log("image_url: ", image_load.url);
-      user.image = image_load.url;
+    if (req.user.id !== req.params.id && req.user.role !== "admin")
+      return res.status(403).json(response("Bạn không có quyền", null));
+
+    let user = await User.findOne({ id: req.params.id }, { password: 0 });
+    if (!user) return res.status(404).json(response("Không tìm thấy User!", null));
+
+    if (req.body.isNewImage) {
+      let newIamge = await uploadImage(req.body.image);
+      req.body.image = newIamge.url;
     }
-    const _update_user = await User.findOneAndUpdate({ id: user.id }, user, { overwrite: false });
-    res.status(200).json(response("update_user", _update_user));
+
+    let update = await User.findOneAndUpdate({ id: req.params.id }, req.body, { overwrite: false, new: true });
+    res.status(200).json(response("Cập nhật thông tin thành công!", update));
   } catch (error) {
+    res.status(400).json(response("Error Update User", error));
+    console.log(error);
+  }
+};
+
+export const add_work_area = async (req, res, next) => {
+  try {
+    if (req.user.role !== "admin") return res.status(403).json(response("Bạn không có quyền", null));
+
+    let user = await User.findOne({ id: req.params.id }, { password: 0 });
+    if (!user) return res.status(404).json(response("Không tìm thấy User!", null));
+
+    console.log(req.body.work_area);
+
+    let update = await User.findOneAndUpdate(
+      { id: req.params.id },
+      { $addToSet: { work_area: { $each: req.body.work_area } } },
+      { overwrite: false, new: true }
+    );
+    res.status(200).json(response("Thêm khu vực thành công!", update));
+  } catch (error) {
+    res.status(400).json(response("Error Add Workarea", error));
     console.log(error);
   }
 };
 
 export const get_user_detail = async (req, res, next) => {
   try {
+    const user = await User.findOne({ id: req.params.id }, { password: 0 });
+
+    if (!user) {
+      return res.status(404).json(response("Không tìm thấy user", null));
+    }
+    if (req.user.role === "admin" || req.user.id === req.params.id) {
+      return res.status(200).json(response("get_user_detail", user));
+    }
+
+    return res.status(403).json(response("Bạn không có quyền", null));
   } catch (error) {
-    console.log(error);
+    return res.status(400).json(response(error, null));
   }
 };
 
-
-/*
-  Truy vẫn lọc người dùng thông qua body của request:  districts:[mã quận]
-*/
 export const get_many_user = async (req, res, next) => {
   try {
-    // kiểm tra req.body
-    const _filter = req.body;
-    const _query = req.query;
-    const _params = req.params;
+    let query = req.query;
+    console.log("query", query);
 
-    if (_filter.districts) {
-      console.log(_filter.districts);
-      res.status(200).json(response("get many user filter by districts", await User.find({work_area:{district:_filter.districrs}})));
+    if (req.query.search === undefined || Object.keys(JSON.parse(req.query.search)).length === 0) {
+      console.log("DEO CO SEARCH");
+      let users = await User.find({ role: "user" });
+      return res.status(200).json(response("get many user", users));
+    } else {
+      const { textSearch, city, districts, active } = JSON.parse(req.query.search);
+
+      if (textSearch) {
+        console.log("textsearch", textSearch);
+        const result = await User.aggregate([
+          {
+            $search: {
+              index: "user_text_search",
+              text: {
+                query: `${textSearch}`,
+                path: {
+                  wildcard: "*",
+                },
+              },
+            },
+          },
+          {
+            $match: {
+              role: "user",
+            },
+          },
+        ]);
+        return res.status(200).json(response("get many user", result));
+      } else {
+        let users = await User.find({ role: "user" });
+      }
+
+      return res.status(200).json(response("get many user", users));
     }
-
-    // if(_filter.role) {
-    //     res.status(200).json(response("get many user filter by role", await User.find({role:_filter.role})));
-    // }
-
-
-    //lay tat ca nguoi dung
-    if (!req.body && !req.params) {
-      const user_list = await User.find({});
-      res.status(200).json(response("get many user", user_list));
-    }
-    // res.status(200).json(response("get many user", null));
-   
   } catch (error) {
-    console.log(error);
+    return res.status(400).json(response(`${error}`, null));
   }
 };
-
 
 export const delete_user = async (req, res, next) => {
   try {

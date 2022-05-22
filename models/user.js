@@ -16,8 +16,8 @@ const userSchema = new Schema({
     default: "N/A",
   },
   active: {
-    type: Boolean,
-    default: true,
+    type: String,
+    default: "Hoạt động",
   },
   email: {
     type: String,
@@ -28,8 +28,7 @@ const userSchema = new Schema({
     default: "N/A",
   },
   birth: {
-    type: String,
-    default: "N/A",
+    type: Date,
   },
   image: {
     type: String,
@@ -41,7 +40,7 @@ const userSchema = new Schema({
         type: String,
         default: "N/A",
       },
-      district: {
+      title: {
         type: String,
         default: "N/A",
       },
@@ -49,6 +48,7 @@ const userSchema = new Schema({
         type: String,
         default: "N/A",
       },
+      _id: false,
     },
   ],
   role: {
