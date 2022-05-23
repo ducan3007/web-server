@@ -117,13 +117,16 @@ export const change_user_password = async(req, res) => {
 };
 
 
-//log out 
+//log out
 export const log_out = async(req, res) => {
   try {
-    let payload = {};
-    const token = jwt.sign(payload,process.env.KEY, { expiresIn: "0" });
-    return res.status(200).json(response("Đăng xuất thành công"));
-  
+    const {isLogout} = req.body;
+    console.log(isLogout);
+    if(isLogout) {
+      let payload = {};
+      const token = jwt.sign(payload,process.env.KEY, { expiresIn: "0" });
+      return res.status(200).json(response("Đăng xuất thành công"));
+    }
   } catch (error) {
     console.log(error);
   }
