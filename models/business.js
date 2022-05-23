@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { no_image } from "../utils/consts.js";
+import { gen_business_id, gen_certificate_id } from "../utils/helpers.js";
+
 const { Schema } = mongoose;
 import certificateSchema from "./certificate.js";
 
@@ -19,15 +21,12 @@ const businessSchema = new Schema({
         type: String,
         default: "Dịch vụ",
       },
+      _id: false,
     },
   ],
   image: {
     type: String,
     default: no_image,
-  },
-  address_code: {
-    type: String,
-    required: true,
   },
 
   address: {
@@ -57,30 +56,92 @@ const businessSchema = new Schema({
     required: true,
   },
 
-  certificate: certificateSchema,
-
-  foods: [
-    {
-      image: {
-        type: String,
-        default: no_image,
-      },
-      name: {
+  certificate: {
+    certificate_id: {
+      type: String,
+      default: "N/A",
+    },
+    status: {
+      type: String,
+      default: "Chưa cấp",
+    },
+    time: {
+      start: {
         type: String,
         default: "N/A",
       },
-      status: {
+      end: {
         type: String,
         default: "N/A",
       },
     },
-  ],
+    last_update: {
+      type: Date,
+      default: new Date(),
+    },
+  },
+
   last_update: {
     type: Date,
     default: new Date(),
   },
 });
 
+businessSchema.index({ business_id: 1 }, { unique: true });
+businessSchema.index({ "certificate.certificate_id": 1 });
+
+const Business = mongoose.model("business", businessSchema);
+
+export const bus_findById = async (business_id) => {
+  return Business.findOne({ business_id: business_id });
+};
+
+export const create_business_id = async () => {
+  try {
+    let bus_id = gen_business_id();
+    while (true) {
+      let business = await Business.findOne({ business_id: bus_id });
+      if (business) {
+        bus_id = gen_business_id();
+      } else {
+        break;
+      }
+    }
+    return bus_id;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const create_cert = async () => {
+  try {
+    let cert_id = gen_certificate_id();
+    while (true) {
+      let cert = await Business.findOne({ "certificate.certificate_id": cert_id });
+      if (cert) {
+        cert_id = gen_business_id();
+      } else {
+        break;
+      }
+    }
+    let start = new Date();
+    let end = new Date();
+    end.setDate(start.getDate() + 180);
+
+    return {
+      certificate_id: cert_id,
+      status: "Còn hạn",
+      time: {
+        start: start.toISOString(),
+        end: end.toISOString(),
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default Business;
 // {
 //   business_id: "20123456",
 //   brandname: "Bún 11",
@@ -119,17 +180,3 @@ const businessSchema = new Schema({
 //   ],
 //   last_update: "20/02/2020",
 // },
-
-const Business = mongoose.model("business", businessSchema);
-
-export const bus_findById = async (business_id) => {
-  return Business.findOne({ business_id: business_id });
-};
-
-export const bus_create_id = async (city_code, district_code) => {
-  var bus_id = city_code + Date.toString;
-  return bus_id;
-};
-
-
-export default Business;

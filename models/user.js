@@ -66,13 +66,13 @@ const User = mongoose.model("user", userSchema);
 export const create_user_id = async (role) => {
   try {
     let user_id = gen_user_id(role);
-    let check = false;
-    while (!check) {
+
+    while (true) {
       let user = await User.findOne({ id: user_id });
       if (user) {
         user_id = gen_user_id(role);
       } else {
-        check = true;
+        break;
       }
     }
     return user_id;

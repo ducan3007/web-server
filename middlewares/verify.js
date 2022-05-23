@@ -2,13 +2,29 @@ import jwt from "jsonwebtoken";
 import response from "../utils/response.js";
 import "dotenv/config";
 
-export const verifyToken = async (req, res, next) => {
-  const token = req.header("x-auth-token");
+export const verifyRequest = (req, res, next) => {
   Object.keys(req.body).forEach((key) => {
     if (req.body[key] === "" || req.body[key] === undefined) {
       delete req.body[key];
     }
   });
+  let searchParams = {};
+  if (req.query.search) {
+    searchParams = JSON.parse(req.query.search);
+    Object.keys(searchParams).forEach((key) => {
+      if (searchParams[key] === "" || searchParams[key] === undefined) {
+        delete searchParams[key];
+      }
+    });
+    req.query.search = JSON.stringify(searchParams);
+  }
+
+  console.log("VERIFIED REQUEST : ", req.query);
+  next();
+};
+
+export const verifyToken = async (req, res, next) => {
+  const token = req.header("x-auth-token");
 
   try {
     if (!token) {
@@ -28,11 +44,6 @@ export const verifyToken = async (req, res, next) => {
 };
 
 export const verifyRole = async (req, res, next) => {
-  Object.keys(req.body).forEach((key) => {
-    if (req.body[key] === "") {
-      delete req.body[key];
-    }
-  });
   const token = req.header("x-auth-token");
   try {
     if (!token) {

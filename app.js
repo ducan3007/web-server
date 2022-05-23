@@ -6,7 +6,7 @@ import cloudinary from "cloudinary";
 
 import 'dotenv/config'
 
-import router from "./routes/index.js";
+import router from "./routes/routes.js";
 
 const app = express();
 

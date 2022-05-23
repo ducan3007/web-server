@@ -1,6 +1,6 @@
 import express from "express";
 
-import { verifyToken, verifyRole } from "../middlewares/verify.js";
+import { verifyToken, verifyRole, verifyRequest } from "../middlewares/verify.js";
 import {
   update_user,
   delete_user,
@@ -12,9 +12,9 @@ import { user_auth } from "../controllers/auth/auth.controller.js";
 
 const user_route = express.Router();
 
-user_route.route("/users").get(verifyRole, get_many_user);
+user_route.route("/users").get(verifyRole, verifyRequest, get_many_user);
 
-user_route.route("/user/workarea/:id").put(verifyRole, add_work_area);
+user_route.route("/user/workarea/:id").put(verifyRole, verifyRequest, add_work_area);
 
 user_route
   .route("/user/:id")
