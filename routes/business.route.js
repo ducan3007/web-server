@@ -27,7 +27,7 @@ business_route.route('/create_business')
 
 
 business_route.route('/business')
-    .post(verifyToken, add_business)
+    .get(verifyToken, get_many_business)
 /*
 
   api này dành cho các cơ sở kinh doanh
@@ -36,12 +36,13 @@ business_route.route('/business')
   
 
 */
-
 business_route
     .route("/business/get_business").get(verifyToken, get_business);
 
+
+    
 business_route
-    .route('/business/update_business').patch(verifyToken, update_business);
+    .route("/business/update_business").patch(verifyToken, update_business);
 
     //prettier-ignore
 

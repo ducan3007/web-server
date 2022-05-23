@@ -1,6 +1,6 @@
 import express from "express";
 
-import { login, create_account,create_admin_account } from "../controllers/auth/auth.controller.js";
+import { login, create_account,create_admin_account,change_user_password, log_out } from "../controllers/auth/auth.controller.js";
 import { verifyToken,verifyRole } from "../middlewares/verify.js";
 import { user_auth } from "../controllers/auth/auth.controller.js";
 
@@ -17,5 +17,9 @@ auth_route.route("/auth").get(verifyToken, user_auth); // Xác thực tài kho�
 
 // dùng api này để xem là người dùng đã đăng nhập chưa.
 
+
+auth_route.route('/user/changepassword').post(verifyToken,change_user_password);
+
+auth_route.route('/user/logout').delete(verifyToken,log_out);
 
 export default auth_route;

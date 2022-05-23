@@ -11,6 +11,8 @@ export const gen_user_id = (role) => {
   return output;
 };
 
+
+//Tạo mới cơ sở kinh doanh bằng cách lấy năm + 1 số tự nhiên có 5 chữ số bất kì
 export const gen_business_id = () => {
   let date = new Date();
   let output = date.getFullYear().toString();

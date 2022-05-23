@@ -65,7 +65,7 @@ export const delete_user = async (req, res, next) => {
     console.log(_filter);
     console.log(user);
     if(user.length != 0) {
-      // await User.findOneAndDelete({ _filter })
+      await User.findOneAndDelete({ _filter })
       return res.status(200).json(response("đã xóa người dùng", user));
     }
     else {

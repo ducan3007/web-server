@@ -4,6 +4,7 @@ import { gen_business_id } from "../../utils/helpers.js";
 
 export const get_many_business = async (req, res) => {
     try {
+        console.log(req.user);
         res.status(200).json(response("get all business", await Business.find()));
     } catch (error) {
         console.log(error);

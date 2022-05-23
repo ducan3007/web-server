@@ -91,3 +91,40 @@ export const user_auth = async (req, res) => {
     console.log(error);
   }
 };
+
+
+  //them phan doi mk cho user
+
+export const change_user_password = async(req, res) => {
+  try {
+      console.log("try to changepassword");
+      const { oldPass, newPass } = req.body;
+      const idUser = req.user.id;
+      let salt = bcrypt.genSaltSync(10);
+      let newPassword = await bcrypt.hash(newPass, salt);
+      const user = await User.findOne({ id: idUser });
+      const checkPassword = await bcrypt.compare(oldPass, user.password);
+      if (!checkPassword) {
+        return res.status(400).json(response("Tài khoản và mật khẩu không đúng"));
+      } else {
+        await User.findOneAndUpdate({id:idUser},{password:newPassword});
+        return res.status(200).json(response("Doi mat khau thành công"));
+      }
+      
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+//log out 
+export const log_out = async(req, res) => {
+  try {
+    let payload = {};
+    const token = jwt.sign(payload,process.env.KEY, { expiresIn: "0" });
+    return res.status(200).json(response("Đăng xuất thành công"));
+  
+  } catch (error) {
+    console.log(error);
+  }
+}
