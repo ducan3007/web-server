@@ -10,6 +10,10 @@ export const update_user = async (req, res, next) => {
     if (req.user.id !== req.params.id && req.user.role !== "admin")
       return res.status(403).json(response("Bạn không có quyền", null));
 
+    if (req.user.role === "user" && req.body.work_area) {
+      return res.status(403).json(response("Bạn không có quyền cập nhật work_area", null));
+    }
+
     let user = await User.findOne({ id: req.params.id }, { password: 0 });
     if (!user) return res.status(404).json(response("Không tìm thấy User!", null));
 
@@ -26,7 +30,6 @@ export const update_user = async (req, res, next) => {
       let hashPassword = await bcrypt.hash(req.body.password, salt);
       req.body.password = hashPassword;
     }
-
     let update = await User.findOneAndUpdate({ id: req.params.id }, req.body, { overwrite: false, new: true });
     res.status(200).json(response("Cập nhật thông tin thành công!", update));
   } catch (error) {
@@ -104,7 +107,6 @@ export const get_many_user = async (req, res, next) => {
 
     __results = await User.find(options, { password: 0 });
     return res.status(200).json(response("get many user without text search", __results));
-    
   } catch (error) {
     return res.status(400).json(response(`${error}`, null));
   }

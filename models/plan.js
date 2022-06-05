@@ -1,5 +1,5 @@
 import { mongoose } from "mongoose";
-import { no_image } from "../utils/consts";
+import { no_image } from "../utils/consts.js";
 
 const { Schema } = mongoose;
 
@@ -7,23 +7,19 @@ const planSchema = new Schema({
   business_id: {
     type: String,
     ref: "business",
-    required: true,
+    required: [true, "Business ID is required"],
   },
-  user_id: {
+  account_id: {
     type: String,
-    ref: "user",
-    required: true,
+    required: [true, "Account ID is required"],
   },
   status: {
     type: String,
-    default: "upcoming",
-  },
-  result_boolean: {
-    type: Boolean,
-    default: false,
+    default: "Đang thực hiện",
   },
   result_comment: {
     type: String,
+    default: "N/A",
   },
   result: {
     type: String,
@@ -31,7 +27,7 @@ const planSchema = new Schema({
   },
   penalty: {
     type: String,
-    default: "Không",
+    default: "N/A",
   },
   schedule: {
     start: {

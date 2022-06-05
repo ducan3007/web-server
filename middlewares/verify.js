@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
 import response from "../utils/response.js";
 import "dotenv/config";
+import Business from "../models/business.js";
 
 export const verifyRequest = (req, res, next) => {
+ 
   Object.keys(req.body).forEach((key) => {
     if (req.body[key] === "" || req.body[key] === undefined) {
       delete req.body[key];
@@ -20,7 +22,7 @@ export const verifyRequest = (req, res, next) => {
   }
 
   console.log("VERIFIED REQUEST : ", req.query);
-  next();
+  return next();
 };
 
 export const verifyToken = async (req, res, next) => {
@@ -54,14 +56,31 @@ export const verifyRole = async (req, res, next) => {
         return res.status(403).json(response("Bạn không có quyền", null));
       }
       req.user = data.user;
-      next();
+      return next();
     });
   } catch (error) {
     console.log(error);
     return res.status(403).json(response("Bạn không có quyền", null));
   }
 };
-export const verifyWorkeArea = async (req, res, next) => {
+export const verifyWorkArea = async (req, res, next) => {
   try {
-  } catch (error) {}
+    if (req.user.role === "admin") {
+      return next();
+    }
+
+    if (!req.body.city || !req.body.district || !req.body.ward)
+      return res.status(400).json(response("Yêu cầu nhập đủ thông tin", null));
+
+    for (let area of req.user.work_area) {
+      console.log("AREA: ", area);
+      console.log("DISTRICT: ", req.body.district);
+      if (area.title === req.body.district) {
+        return next();
+      }
+    }
+    return res.status(403).json(response("Bạn không có quyền", null));
+  } catch (error) {
+    return res.status(403).json(response(error, null));
+  }
 };

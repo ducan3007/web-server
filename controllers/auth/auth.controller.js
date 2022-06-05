@@ -45,7 +45,7 @@ export const create_account = async (req, res) => {
       work_area: req.body.work_area,
       role: "user",
     });
-    
+
     await newUser.save();
     return res.status(200).json(response("Tạo tài khoản User thành công", newUser));
   } catch (error) {
@@ -57,12 +57,12 @@ export const login = async (req, res, next) => {
   try {
     const { account, password } = req.body;
     const user = await User.findOne({ id: account });
+
     if (!user) {
       return res.status(404).json(response("Tài khoản và mật khẩu không đúng", null));
     }
-
     const checkPassword = await bcrypt.compare(password, user.password);
-    console.log(user);
+
     if (!checkPassword) {
       return res.status(400).json(response("Tài khoản và mật khẩu không đúng", null));
     } else {
@@ -80,7 +80,7 @@ export const login = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    return res.status(200).json(response("Tài khoản và mật khẩu không đúng", { token }));
+    return res.status(400).json(response("Tài khoản và mật khẩu không đúng", { token }));
   }
 };
 
