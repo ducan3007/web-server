@@ -1,6 +1,10 @@
 # WEB CUỐI KỲ
 
+### Node, React, Mongodb
+
 ĐỀ BÀI : https://itest.com.vn/lects/webappdev/mockproj/healthy-first.htm
+
+Client: https://github.com/ducan3007/web-client
 
 ### Chức năng
 
@@ -131,28 +135,4 @@
 
 ````
 
-### Query
 
-### Tìm một đối tượng trong một trường là Array : sử dụng $elemMatch.
-
-```
- work_area:{
-     city:[
-       {
-         title:'hanoi',
-         code:'001'
-       }
-     ],
-     district:[
-       {
-         title:'nam tu liem'
-         code:'001030
-       }
-     ]
-}
-
-db.col.find({work_area.city:{$elemMatch:{code:'001}}})
-
-```
-
-### Nếu mảng chỉ chứa các chuỗi thì dùng find({field:"value"}) như bình thường
