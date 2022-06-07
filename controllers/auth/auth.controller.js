@@ -61,6 +61,9 @@ export const login = async (req, res, next) => {
     if (!user) {
       return res.status(404).json(response("Tài khoản và mật khẩu không đúng", null));
     }
+    if (user.role !== "admin" && user.active !== "Hoạt động") {
+      return res.status(404).json(response("Tài khoản đã bị khóa", null));
+    }
     const checkPassword = await bcrypt.compare(password, user.password);
 
     if (!checkPassword) {

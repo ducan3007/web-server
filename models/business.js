@@ -80,7 +80,10 @@ const businessSchema = new Schema({
       default: new Date(),
     },
   },
-
+  last_check: {
+    type: String,
+    default: "N/A",
+  },
   last_update: {
     type: Date,
     default: new Date(),

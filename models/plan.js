@@ -19,7 +19,7 @@ const planSchema = new Schema({
   },
   result_comment: {
     type: String,
-    default: "N/A",
+    default: "Không có",
   },
   result: {
     type: String,
@@ -27,7 +27,7 @@ const planSchema = new Schema({
   },
   penalty: {
     type: String,
-    default: "N/A",
+    default: "Không có",
   },
   schedule: {
     start: {
